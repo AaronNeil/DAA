@@ -72,13 +72,7 @@ public class SinglyLinkedList {
 
     public int deleteNewNode(){
         if (listSize <= 1){
-            int val = head.value;
-            head = head.next;
-            if (head == null) {
-                tail = null;
-            }
-            listSize--;
-            return val;
+            return deleteAtIndex(0);
         }
         else {
             Node tempNode = head;
@@ -94,7 +88,16 @@ public class SinglyLinkedList {
     }
 
     public int deleteAtIndex(int index){
-        if (index == 0 || index == (listSize - 1) || listSize < index){
+        if (index == 0){
+            int val = head.value;
+            head = head.next;
+            if (head == null) {
+                tail = null;
+            }
+            listSize--;
+            return val;
+        }
+        if (index == (listSize - 1) || listSize < index){
             return deleteNewNode();
         }
         else {
@@ -104,6 +107,7 @@ public class SinglyLinkedList {
             }
             int val = tempNode.next.value;
             tempNode.next = tempNode.next.next;
+            listSize--;
             return val;
         }
     }
