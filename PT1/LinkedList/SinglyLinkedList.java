@@ -3,10 +3,8 @@ package PT1.LinkedList;
 import java.util.Scanner;
 
 public class SinglyLinkedList {
-    int listSize = 0;
-    Node head;
-    Node tail;
-    
+    private int listSize = 0;
+    private Node head, tail;
 
     public static class Node {
         int value;
@@ -38,16 +36,15 @@ public class SinglyLinkedList {
 
         if (head == null) {
             head = newNode;
-            tail = newNode;
         }
         else {
-            Node last = head;
-            while (last.next != null) {
-                last = last.next;
+            Node tempNode = head;
+            while (tempNode.next != null) {
+                tempNode = tempNode.next;
             }
-            last.next = newNode;
-            tail = newNode;
+            tempNode.next = newNode;
         }
+        tail = newNode;
         listSize++;
     }
 
