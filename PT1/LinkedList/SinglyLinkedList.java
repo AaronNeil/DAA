@@ -23,11 +23,12 @@ public class SinglyLinkedList {
 
     public void display(){
         Node tempNode = head;
+        System.out.println();
         while (tempNode != null){
             System.out.print(tempNode.value + " -> ");
             tempNode = tempNode.next;
         }
-        System.out.print("null\n\nhead:" + head.value + "\ttail:" + tail.value + "\tlistSize:" + listSize);
+        System.out.println("null\nhead:" + head.value + "\ttail:" + tail.value + "\tlistSize:" + listSize);
     }
     
     public void createNewNode (int val) {
@@ -90,7 +91,7 @@ public class SinglyLinkedList {
             listSize--;
             return val;
         }
-        if (index == (listSize - 1) || listSize < index) return deleteNewNode();
+        if (index >= (listSize - 1) || listSize < index) return deleteNewNode();
         else {
             Node tempNode = head;
             for (int i = 0; i < (index - 1) ; i++) tempNode = tempNode.next;
@@ -118,10 +119,11 @@ public class SinglyLinkedList {
         SinglyLinkedList list = new SinglyLinkedList();
     
         while (true) {
-            System.out.println("\n\n[0]Exit\t\t[1]Create node\t\t[2]Delete last node");
-            System.out.println("[3]Insert node at index\t\t\t[4]Delete node at index");
-            System.out.println("[5]Get node info based on index");
-            System.out.println("[6]Display all info");
+
+            System.out.println("\n\n[0]Exit\t\t\t[3]Insert node at index\t\t[6]Display all info");
+            System.out.println("[1]Create node\t\t[4]Delete node at index");
+            System.out.println("[2]Delete last node\t[5]Get node info based on index");
+
             
             String userInput = sc.next();
             if (!userInput.matches("\\d+")) {

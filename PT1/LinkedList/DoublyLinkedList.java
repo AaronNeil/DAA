@@ -31,35 +31,29 @@ public class DoublyLinkedList {
     
     public void display(){
         Node tempNode = head;
-        System.out.print("null <-");
+        System.out.print(tempNode != null ? "\nnull <-" : "\n");
         while (tempNode != null){
             System.out.print(" " + tempNode.value + " -");
             tempNode = tempNode.next;
         }
-        System.out.print("> null\n\nhead: " + head.value + "\ttail: " + tail.value + "\tlistSize: " + listSize);
+        System.out.println("> null\nhead:" + head.value + "\ttail:" + tail.value + "\tlistSize:" + listSize);
     }
     
     public void createNewNode (int val) {
         Node newNode = new Node(val);
         newNode.next = null;
-        if (head == null){
-            head = newNode;
-            newNode.prev = null;
-        }
-        else if (head.prev == null && head == tail){
-            head.next = newNode;
-            newNode.prev = head;
+        if (head == null) {
+            head = tail = newNode;
         } else {
             tail.next = newNode;
             newNode.prev = tail;
+            tail = newNode;
         }
-        tail = newNode;
         listSize++;       
     }
 
     public void insertAtIndex (int val, int index){
         Node tempNode = head;
-
 
         if (head == null || index <= 0) {
             head = new Node(val, head);
@@ -77,11 +71,46 @@ public class DoublyLinkedList {
         listSize++;
     }
 
-    public void deleteNewNode (){
-
+    public int deleteNewNode (){
+        if (listSize <= 1) return deleteAtIndex(0);
+        int val = tail.value;
+        tail = tail.prev;
+        tail.next = null;
+        listSize--;
+        return val;
     }
-    public void deleteAtIndex (int index){
+    public int deleteAtIndex (int index){
+        if (index <= 0){
+            int val = head.value;
+            head = head.next;
+            if (head == null) tail = null;
+            listSize--;
+            return val;
+        }
+        if (index >= (listSize - 1) || listSize < index) return deleteNewNode();
+        else{
+            Node tempNode = head;
+            for (int i = 0; i < (index - 1) ; i++) tempNode = tempNode.next;
+            int val = tempNode.next.value;
+            tempNode.next = tempNode.next.next;
+            tempNode.next.prev = tempNode;
+            listSize--;
+            return val;
+        }
+    }
 
+    public void callNodeAtIndex(int index){
+        if (head == null || index >= listSize || index < 0) {
+            System.out.println("Node [" + index + "] does not exist / null.");
+            return;
+        }
+        
+        Node tempNode = head;
+        for (int i = 0; i < index; i++) tempNode = tempNode.next;
+    
+        System.out.println("\nNode value of index[" + index + "]: " + tempNode.value);
+        System.out.println("Node value of prev index: " + (tempNode.prev != null ? tempNode.prev.value : "null"));
+        System.out.println("Node value of next index: " + (tempNode.next != null ? tempNode.next.value : "null"));
     }
 
     public static void main(String[] args) {
@@ -89,8 +118,9 @@ public class DoublyLinkedList {
         DoublyLinkedList list = new DoublyLinkedList();
 
         while (true) {
-            System.out.println("\n\n[0]Exit  [1]Create node  [2]Delete last node");
-            System.out.println("[3]Insert node at index  [4]Delete node at index");
+            System.out.println("\n\n[0]Exit\t\t\t[3]Insert node at index\t\t[6]Display all info");
+            System.out.println("[1]Create node\t\t[4]Delete node at index");
+            System.out.println("[2]Delete last node\t[5]Get node info based on index");
 
             String userInput = sc.next();
             if (!userInput.matches("\\d+")) {
@@ -134,14 +164,23 @@ public class DoublyLinkedList {
                         System.out.println("No nodes to remove.");
                     }
                     break;
+    
+                    case 5:
+                    System.out.print("Enter index of node to call: ");
+                    if (sc.hasNextInt()) list.callNodeAtIndex(sc.nextInt());
+                    else System.out.println("Invalid index.");
+                    break;
+    
+                case 6:
+                    try {
+                        list.display();            
+                    } catch (NullPointerException e) {
+                        System.out.println("\nNo nodes to display.");
+                    }
+                    break;
                 default:
                     System.out.println("Invalid choice.");
                     break;
-            }
-            try {
-                list.display();            
-            } catch (NullPointerException e) {
-                System.out.println("No nodes to display.");
             }
         }
         sc.close();
