@@ -16,6 +16,12 @@ public class DoublyLinkedList {
             prev = null;
         }
 
+        Node (int v, Node next_) {
+            value = v;
+            next = next_;
+            prev = null;
+        }
+
         Node (int v, Node next_, Node prev_){
             value = v;
             next = next_;
@@ -24,7 +30,13 @@ public class DoublyLinkedList {
     }
     
     public void display(){
-
+        Node tempNode = head;
+        System.out.print("null <-");
+        while (tempNode != null){
+            System.out.print(" " + tempNode.value + " -");
+            tempNode = tempNode.next;
+        }
+        System.out.print("> null\n\nhead: " + head.value + "\ttail: " + tail.value + "\tlistSize: " + listSize);
     }
     
     public void createNewNode (int val) {
@@ -33,20 +45,36 @@ public class DoublyLinkedList {
         if (head == null){
             head = newNode;
             newNode.prev = null;
+        }
+        else if (head.prev == null && head == tail){
+            head.next = newNode;
+            newNode.prev = head;
         } else {
-            Node tempNode = head;
-            while (tempNode.next != null){
-                tempNode = tempNode.next;
-            }
-            tempNode.next = newNode;
-            tempNode.prev = tempNode;
+            tail.next = newNode;
+            newNode.prev = tail;
         }
         tail = newNode;
-        listSize++;
+        listSize++;       
     }
 
     public void insertAtIndex (int val, int index){
+        Node tempNode = head;
 
+
+        if (head == null || index <= 0) {
+            head = new Node(val, head);
+            if (head.next == null) tail = head;
+            listSize++;
+            return;
+        }
+        for (int i = 0; i < index - 1 && tempNode.next != null; i++) {
+            tempNode = tempNode.next;
+        }
+        tempNode.next = new Node(val, tempNode.next, tempNode.prev);
+        if (tempNode.next.next == null) {
+            tail = tempNode.next;
+        }
+        listSize++;
     }
 
     public void deleteNewNode (){
@@ -61,9 +89,9 @@ public class DoublyLinkedList {
         DoublyLinkedList list = new DoublyLinkedList();
 
         while (true) {
-            System.out.println("\n0 - Exit, 1 - Create node, 2 - Delete last node");
-            System.out.println("3 - Insert node at index, 4 - Delete node at index");
-            
+            System.out.println("\n\n[0]Exit  [1]Create node  [2]Delete last node");
+            System.out.println("[3]Insert node at index  [4]Delete node at index");
+
             String userInput = sc.next();
             if (!userInput.matches("\\d+")) {
                 System.out.println("Invalid input. Please enter a number.");
@@ -79,7 +107,6 @@ public class DoublyLinkedList {
                     if (sc.hasNextInt()) list.createNewNode(sc.nextInt());
                     else System.out.println("Invalid input.");
                     break;
-    
                 case 2:
                     try {
                         list.deleteNewNode();
@@ -87,7 +114,6 @@ public class DoublyLinkedList {
                         System.out.println("No nodes to remove.");
                     }
                     break;
-    
                 case 3:
                     System.out.print("Enter value to add: ");
                     if (sc.hasNextInt()) {
@@ -99,7 +125,6 @@ public class DoublyLinkedList {
                         System.out.println("Invalid value.");
                     }
                     break;
-    
                 case 4:
                     System.out.print("Enter index of node to delete: ");
                     try {
@@ -109,7 +134,6 @@ public class DoublyLinkedList {
                         System.out.println("No nodes to remove.");
                     }
                     break;
-    
                 default:
                     System.out.println("Invalid choice.");
                     break;
