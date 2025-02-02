@@ -35,16 +35,18 @@ public class SinglyLinkedList {
         Node newNode = new Node(val);
         newNode.next = null;
 
-        if (head == null) {
-            head = newNode;
-        }
+        // If list is empty, make the new Node into the head. Else,
+        // Get the 2nd to last node.
+        if (head == null) head = newNode;
         else {
             Node tempNode = head;
             while (tempNode.next != null) {
                 tempNode = tempNode.next;
             }
-            tempNode.next = newNode;
+            tempNode.next = newNode;        // Create a Node and place it at the last.
         }
+
+        // Change the tail into the new Node and increment size by 1.
         tail = newNode;
         listSize++;
     }
@@ -52,27 +54,31 @@ public class SinglyLinkedList {
     public void insertAtIndex (int val, int index) {
         Node tempNode = head;
 
+        // Create a node at head or if list is empty
         if (head == null || index <= 0) {
             head = new Node(val, head);
             if (head.next == null) tail = head;
             listSize++;
             return;
         }
-        for (int i = 0; i < index - 1 && tempNode.next != null; i++) {
-            tempNode = tempNode.next;
-        }
+
+        // Get the prev node of node[index]
+        for (int i = 0; i < index - 1 && tempNode.next != null; i++) tempNode = tempNode.next;
+        
+        //Create the node based on the index and change the tail if the created node is on the lasst.
         tempNode.next = new Node(val, tempNode.next);
-        if (tempNode.next.next == null) {
-            tail = tempNode.next;
-        }
+        if (tempNode.next.next == null) tail = tempNode.next;
         listSize++;
     }
 
     public int deleteNewNode(){
+        //  If list size is 1, run deleteAtIndex method else, 
+        //  remove tail
         if (listSize <= 1) return deleteAtIndex(0);
         else {
             Node tempNode = head;
             
+            //  Get prev node of tail, setthe node as  tail, and change the next node of the tail to null.
             for (int i = 0; i < (listSize - 2) ; i++) tempNode = tempNode.next;
             
             int val = tail.value;
@@ -84,16 +90,24 @@ public class SinglyLinkedList {
     }
 
     public int deleteAtIndex(int index){
+        
+        // delete head node and move it to the next node.
         if (index <= 0){
             int val = head.value;
             head = head.next;
+            
+            //  If list is empty, change tail to null.
             if (head == null) tail = null;
             listSize--;
             return val;
         }
-        if (index >= (listSize - 1) || listSize < index) return deleteNewNode();
+        
+        //  If index is removing tail, run deleteNewNode() method
+        if (index >= (listSize - 1)) return deleteNewNode();
         else {
             Node tempNode = head;
+
+            //  remove the the node[index] and change the prev node's next node into the next of the node[index].
             for (int i = 0; i < (index - 1) ; i++) tempNode = tempNode.next;
             int val = tempNode.next.value;
             tempNode.next = tempNode.next.next;
@@ -103,14 +117,17 @@ public class SinglyLinkedList {
     }
 
     public void callNodeAtIndex(int index) {
+        //  Outputs if list is empty
         if (head == null || index >= listSize) {
             System.out.println("Node [" + index + "] does not exist / null.");
             return;
         }
-        
         Node tempNode = head;
+
+        // Loops through the list to find node[index].
         for (int i = 0; i < index; i++) tempNode = tempNode.next;
     
+        // Outputs Node value and value of next node.
         System.out.println("\nNode value of index[" + index + "]: " + tempNode.value);
         System.out.println("Node value of next index: " + (tempNode.next != null ? tempNode.next.value : "null") + "\n");
     }

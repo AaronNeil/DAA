@@ -79,6 +79,7 @@ public class DoublyLinkedList {
         listSize--;
         return val;
     }
+
     public int deleteAtIndex (int index){
         if (index <= 0){
             int val = head.value;
