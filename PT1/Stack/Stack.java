@@ -22,7 +22,7 @@ public class Stack {
             System.out.print(tempNode.value + " -> ");
             tempNode = tempNode.next;
         }
-        System.out.println("Top: " + top.value);
+        System.out.println("null\nTop: " + top.value);
     }
 
     public void push(int val){
@@ -44,7 +44,7 @@ public class Stack {
         } else {
             int val = tempNode.next.value; 
             tempNode.next = null;
-            tempNode = top;
+            top = tempNode;
             listSize--;
             return val;
         }
@@ -94,5 +94,6 @@ public class Stack {
                     break;
             }
         }
+        sc.close();
     }
 }
