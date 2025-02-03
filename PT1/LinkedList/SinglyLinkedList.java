@@ -54,7 +54,7 @@ public class SinglyLinkedList {
     public void insertAtIndex (int val, int index) {
         Node tempNode = head;
 
-        // Create a node at head or if list is empty
+        //  If the list is empty or the index is 0, Create a node at head
         if (head == null || index <= 0) {
             head = new Node(val, head);
             if (head.next == null) tail = head;
@@ -62,10 +62,10 @@ public class SinglyLinkedList {
             return;
         }
 
-        // Get the prev node of node[index]
+        //  Get the prev node of node[index]
         for (int i = 0; i < index - 1 && tempNode.next != null; i++) tempNode = tempNode.next;
         
-        //Create the node based on the index and change the tail if the created node is on the lasst.
+        //Create the node based on the index and change the tail if the created node is on the last.
         tempNode.next = new Node(val, tempNode.next);
         if (tempNode.next.next == null) tail = tempNode.next;
         listSize++;
@@ -78,7 +78,7 @@ public class SinglyLinkedList {
         else {
             Node tempNode = head;
             
-            //  Get prev node of tail, setthe node as  tail, and change the next node of the tail to null.
+            //  Get prev node of tail, change the node as tail, and change the next node of the tail to null.
             for (int i = 0; i < (listSize - 2) ; i++) tempNode = tempNode.next;
             
             int val = tail.value;
@@ -91,7 +91,7 @@ public class SinglyLinkedList {
 
     public int deleteAtIndex(int index){
         
-        // delete head node and move it to the next node.
+        //  Delete head node and move it to the next node.
         if (index <= 0){
             int val = head.value;
             head = head.next;
@@ -107,7 +107,7 @@ public class SinglyLinkedList {
         else {
             Node tempNode = head;
 
-            //  remove the the node[index] and change the prev node's next node into the next of the node[index].
+            //  Remove the the node[index] and change the prev node's next node into the next of the node[index].
             for (int i = 0; i < (index - 1) ; i++) tempNode = tempNode.next;
             int val = tempNode.next.value;
             tempNode.next = tempNode.next.next;
@@ -140,7 +140,6 @@ public class SinglyLinkedList {
             System.out.println("\n\n[0]Exit\t\t\t[3]Insert node at index\t\t[6]Display all info");
             System.out.println("[1]Create node\t\t[4]Delete node at index");
             System.out.println("[2]Delete last node\t[5]Get node info based on index");
-
             
             String userInput = sc.next();
             if (!userInput.matches("\\d+")) {

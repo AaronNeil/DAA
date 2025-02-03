@@ -42,10 +42,12 @@ public class DoublyLinkedList {
     public void createNewNode (int val) {
         Node newNode = new Node(val);
         newNode.next = null;
-        if (head == null) {
-            head = tail = newNode;
-        } else {
-            tail.next = newNode;
+
+        // If list is empty, make the new Node into the head. Else,
+        // Get the 2nd to last node.
+        if (head == null) head = tail = newNode;
+        else {
+            tail.next = newNode;            // Create a Node and place it at the last.
             newNode.prev = tail;
             tail = newNode;
         }
@@ -55,24 +57,28 @@ public class DoublyLinkedList {
     public void insertAtIndex (int val, int index){
         Node tempNode = head;
 
+        //  If the list is empty or the index is 0, Create a node at head
         if (head == null || index <= 0) {
             head = new Node(val, head);
             if (head.next == null) tail = head;
             listSize++;
             return;
         }
-        for (int i = 0; i < index - 1 && tempNode.next != null; i++) {
-            tempNode = tempNode.next;
-        }
+
+        //  Get the prev node of node[index]
+        for (int i = 0; i < index - 1 && tempNode.next != null; i++) tempNode = tempNode.next;
+
+        //  Create the node based on the index and change the tail if the created node is on the last.
         tempNode.next = new Node(val, tempNode.next, tempNode.prev);
-        if (tempNode.next.next == null) {
-            tail = tempNode.next;
-        }
+        if (tempNode.next.next == null) tail = tempNode.next;
         listSize++;
     }
 
     public int deleteNewNode (){
+        //  If list size is 1, run deleteAtIndex method
         if (listSize <= 1) return deleteAtIndex(0);
+
+        //  Remove the tail, change the tail to the previous node, and change the next node of the tail to null.
         int val = tail.value;
         tail = tail.prev;
         tail.next = null;
@@ -81,16 +87,23 @@ public class DoublyLinkedList {
     }
 
     public int deleteAtIndex (int index){
+        //  Delete head node and move it to the next node.
         if (index <= 0){
             int val = head.value;
             head = head.next;
+            
+            //  If list is empty, change tail to null.
             if (head == null) tail = null;
             listSize--;
             return val;
         }
-        if (index >= (listSize - 1) || listSize < index) return deleteNewNode();
+
+        //  If index is removing tail, run deleteNewNode() method
+        if (index >= (listSize - 1)) return deleteNewNode();
         else{
             Node tempNode = head;
+            
+            //  Remove the the node[index] and change the prev node's next node into the next of the node[index].
             for (int i = 0; i < (index - 1) ; i++) tempNode = tempNode.next;
             int val = tempNode.next.value;
             tempNode.next = tempNode.next.next;
@@ -101,14 +114,17 @@ public class DoublyLinkedList {
     }
 
     public void callNodeAtIndex(int index){
+        //  Outputs if list is empty
         if (head == null || index >= listSize || index < 0) {
             System.out.println("Node [" + index + "] does not exist / null.");
             return;
         }
-        
         Node tempNode = head;
+
+        // Loops through the list to find node[index].
         for (int i = 0; i < index; i++) tempNode = tempNode.next;
-    
+        
+        // Outputs Node value and value of next node.
         System.out.println("\nNode value of index[" + index + "]: " + tempNode.value);
         System.out.println("Node value of prev index: " + (tempNode.prev != null ? tempNode.prev.value : "null"));
         System.out.println("Node value of next index: " + (tempNode.next != null ? tempNode.next.value : "null"));
