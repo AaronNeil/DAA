@@ -17,8 +17,6 @@ public class BinaryTree {
 
     }
 
-
-
     public void insert(){
         
     }

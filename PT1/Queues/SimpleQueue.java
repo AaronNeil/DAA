@@ -39,6 +39,7 @@ public class SimpleQueue {
         Node tempNode = top;
         if (listSize == 1) {
             top = bottom = null;
+            listSize--;
             return tempNode.value;
         } else {
             int val = tempNode.value;
