@@ -17,12 +17,14 @@ public class BinaryTree {
 
     }
 
-    public void insert(){
-        
-    }
-
-    public void insertAtIndex(int index){
-
+    public static void insert(Scanner sc){
+        int userInput = 0;
+        while (true) {
+            System.out.println("Enter root node: ");
+            if(sc.hasNextInt()) userInput = sc.nextInt();
+            break;
+        }
+        Node rootNode = new Node(userInput);
     }
 
     public void delete(){
@@ -31,20 +33,35 @@ public class BinaryTree {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int userInput = 0;
-
-        while (true) {
-            System.out.println("Enter root node: ");
-            if(sc.hasNextInt()) userInput = sc.nextInt();
-            break;
-        }
-        Node rootNode = new Node(userInput);
+        BinaryTree list = new BinaryTree();
+        
         
 
         while (true) {
-            System.out.println("\n\n[0]Exit\t\t\t[4]Replace key");
-            System.out.println("[1]Insert key\t\t[6]Display all info");
-            System.out.println("[2]Delete key\t\t[5]Get info on key based on index");
+            System.out.println("\n\n[0]Exit\t\t\t[2]Delete key");
+            System.out.println("[1]Insert key(s)");
+
+            String userInput = sc.next();
+            if (!userInput.matches("\\d+")) {
+                System.out.println("Invalid input. Please enter a number.");
+                continue;
+            }
+            int input = Integer.parseInt(userInput);
+            if (input == 0) break;
+
+            switch (input) {
+                case 1:
+                    // try {
+                        insert(sc);
+                    // } catch (){
+
+                    // }
+                    break;
+            
+                default:
+                System.out.println("Invalid choice.");
+                    break;
+            }
         }
         
 
