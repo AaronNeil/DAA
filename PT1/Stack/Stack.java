@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Stack {
     private int listSize = 0;
-    private Node top, bottom;
+    private Node top;
 
     public static class Node {
         int value;
@@ -17,9 +17,9 @@ public class Stack {
     }
 
     public void display(){
-        Node tempNode = bottom;
+        Node tempNode = top;
         while (tempNode != null){
-            System.out.print(tempNode.value + " -> ");
+            System.out.print(tempNode.value + " <- ");
             tempNode = tempNode.next;
         }
         System.out.println("null\nTop: " + top.value);
@@ -27,27 +27,19 @@ public class Stack {
 
     public void push(int val){
         Node newNode = new Node(val);
-        if (top == null) bottom = top = newNode;
+        if (top == null) top = newNode;
         else{
-            top.next = newNode;
+            newNode.next = top;
             top = newNode;
         }
         listSize++;
     }
 
     public int pop(){
-        Node tempNode = bottom;
-        for (int i = 0; i < (listSize - 2) ; i++) tempNode = tempNode.next;
-        if (listSize == 1) {
-            top = bottom = null;
-            return tempNode.value;
-        } else {
-            int val = tempNode.next.value; 
-            tempNode.next = null;
-            top = tempNode;
-            listSize--;
-            return val;
-        }
+        Node tempNode = top;
+        top = top.next;
+        listSize--;
+        return tempNode.value;
     }
 
     public static void main(String[] args) {
