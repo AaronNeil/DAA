@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class PriorityQueue {
     private int listSize = 0;
-    private Node top, bottom;
+    private Node top;
 
     public static class Node {
         int value, priority;
@@ -29,7 +29,7 @@ public class PriorityQueue {
     public void enqueue(int val, int priority){
         Node newNode = new Node(val, priority);
         Node tempNode = top;
-        if (top == null) bottom = top = newNode;
+        if (top == null) top = newNode;
         else if (tempNode.priority < newNode.priority){
             newNode.next = top;
             top = newNode;
