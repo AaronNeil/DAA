@@ -3,7 +3,6 @@ import java.util.Scanner;
 
 
 public class Stack {
-    private int listSize = 0;
     private Node top;
 
     public static class Node {
@@ -32,13 +31,11 @@ public class Stack {
             newNode.next = top;
             top = newNode;
         }
-        listSize++;
     }
 
     public int pop(){
         Node tempNode = top;
         top = top.next;
-        listSize--;
         return tempNode.value;
     }
 

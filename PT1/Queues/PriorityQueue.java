@@ -3,7 +3,6 @@ package PT1.Queues;
 import java.util.Scanner;
 
 public class PriorityQueue {
-    private int listSize = 0;
     private Node top;
 
     public static class Node {
@@ -40,13 +39,11 @@ public class PriorityQueue {
             newNode.next = tempNode.next;
             tempNode.next = newNode;
         }
-        listSize++;
     }
 
     public int dequeue(){
         Node tempNode = top;
         top = top.next;
-        listSize--;
         return tempNode.value;
     }
 
