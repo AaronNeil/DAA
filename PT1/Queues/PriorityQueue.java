@@ -25,8 +25,26 @@ public class PriorityQueue {
         System.out.println("null\nTop: " + top.value);
     }
 
-    public void enqueue(int val, int priority){
-        Node newNode = new Node(val, priority);
+    public void enqueue(Scanner sc){
+        int value, priority;
+        
+        System.out.print("Enter value to add: ");
+        if (sc.hasNextInt()) {
+            value = sc.nextInt();
+            System.out.print("Enter priority (higher index = higher priority): ");
+            if (sc.hasNextInt()){
+                priority = sc.nextInt();
+            }
+            else {
+                System.out.println("Invalid input.");
+                return;
+            }
+        } else {
+            System.out.println("Invalid value.");
+            return;
+        }
+ 
+        Node newNode = new Node(value, priority);
         Node tempNode = top;
         if (top == null) top = newNode;
         else if (tempNode.priority < newNode.priority){
@@ -60,43 +78,24 @@ public class PriorityQueue {
                 System.out.println("Invalid input. Please enter a number.");
                 continue;
             }
-
             int input = Integer.parseInt(userInput);
             if (input == 0) break;
-    
-            switch (input) {
-                case 1:
-                    System.out.print("Enter value to add: ");
-                    if (sc.hasNextInt()) {
-                        int value = sc.nextInt();
-                        System.out.print("Enter priority (higher index = higher priority): ");
-                        if (sc.hasNextInt()) list.enqueue(value, sc.nextInt());
-                        else System.out.println("Invalid input.");
-                    } else {
-                        System.out.println("Invalid value.");
-                    }
-                    break;
-    
-                case 2:
-                    try { 
-                        list.dequeue();
-                    } catch (NullPointerException e) {
-                        System.out.println("\nNo elements to remove.");
-                    }
-                    break;
-    
-                case 3:
-                    try {
-                        list.display();            
-                    } catch (NullPointerException e) {
-                        System.out.println("\nNo elements to display.");
-                    }
-                    break;
-                default:
-                    System.out.println("Invalid choice.");
-                    break;
-            }
+            
+            processInput(input, sc, list); 
         }
         sc.close();
+    }
+
+    public static void processInput(int input, Scanner sc, PriorityQueue list) {
+        try {
+            switch (input) {
+                case 1 -> list.enqueue(sc);
+                case 2 -> list.dequeue();
+                case 3 -> list. display();
+                default -> System.out.println("Invalid choice.");
+            }
+        } catch (NullPointerException e) {
+            System.out.println("\nNo elements exist.");
+        }
     }
 }
