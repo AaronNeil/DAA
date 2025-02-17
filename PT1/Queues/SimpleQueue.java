@@ -25,7 +25,16 @@ public class SimpleQueue {
         System.out.println("null\nTop: " + top.value);
     }
 
-    public void enqueue(int val){
+    public void enqueue(Scanner sc){
+        int val;
+        
+        System.out.print("Enter value to add: ");
+            if (sc.hasNextInt()) val = sc.nextInt();
+            else{
+                System.out.println("Invalid input.");
+                return;
+            }
+
         Node newNode = new Node(val);
         if (top == null) bottom = top = newNode;
         else{
@@ -67,33 +76,22 @@ public class SimpleQueue {
             int input = Integer.parseInt(userInput);
             if (input == 0) break;
     
-            switch (input) {
-                case 1:
-                    System.out.print("Enter value to add: ");
-                    if (sc.hasNextInt()) list.enqueue(sc.nextInt());
-                    else System.out.println("Invalid input.");
-                    break;
-    
-                case 2:
-                    try { 
-                        list.dequeue();
-                    } catch (NullPointerException e) {
-                        System.out.println("\nNo elements to remove.");
-                    }
-                    break;
-    
-                case 3:
-                    try {
-                        list.display();            
-                    } catch (NullPointerException e) {
-                        System.out.println("\nNo elements to display.");
-                    }
-                    break;
-                default:
-                    System.out.println("Invalid choice.");
-                    break;
-            }
+            processInput(input, sc, list);
+
         }
         sc.close();
+    }
+
+    public static void processInput(int input, Scanner sc, SimpleQueue list) {
+        try {
+            switch (input) {
+                case 1 -> list.enqueue(sc);
+                case 2 -> list.dequeue();
+                case 3 -> list.display();
+                default -> System.out.println("Invalid choice.");
+            }
+        } catch (NullPointerException e) {
+            System.out.println("\nNo elements exist.");
+        }
     }
 }

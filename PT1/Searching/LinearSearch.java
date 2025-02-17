@@ -28,7 +28,16 @@ public class LinearSearch {
         }
     }
 
-    public void insert (int value){
+    public void insert (Scanner sc){
+        int value;
+        
+        System.out.print("Enter value to add: ");
+        if (sc.hasNextInt()) value = sc.nextInt();
+        else {
+            System.out.println("Invalid input.");
+            return;
+        }
+
         Node newNode = new Node(value);
         newNode.next = null;
 
@@ -44,16 +53,28 @@ public class LinearSearch {
         listSize++;
     }
 
-    public int search (int value){
-        Node tempNode = head;
+    public void search (Scanner sc){
+        int value, index;
         
+        System.out.print("Enter value to search: ");
+        if (sc.hasNextInt()) value = sc.nextInt();
+        else{
+            System.out.println("Invalid input.");
+            return;
+        }
+      
+        Node tempNode = head;
         for (int i = 0; i <= listSize - 1; i ++){
             if (tempNode.value == value){
-                return i;
+                index = i;
             }
             tempNode = tempNode.next;
         }
-        return -1;
+        index = -1;
+
+        if (index == -1) System.out.println("\nNo nodes exist with given value.");
+        else System.out.println("The value is at index[" + index + "]");
+
     }
 
     public static void main(String[] args) {
@@ -72,32 +93,21 @@ public class LinearSearch {
     
             int input = Integer.parseInt(userInput);
             if (input == 0) break;
-            
-            switch (input) {
-                case 1:
-                    System.out.print("Enter value to add: ");
-                    if (sc.hasNextInt()) list.insert(sc.nextInt());
-                    else System.out.println("Invalid input.");
-                    break;
-    
-                case 2:
-                    System.out.print("Enter value to search: ");
-                    if (sc.hasNextInt()) {
-                        int  element = list.search(sc.nextInt());
-                        if (element == -1) System.out.println("\nNo nodes exist with given value.");
-                        else System.out.println("The value is at index[" + element + "]");
-                    } 
-                    else System.out.println("Invalid input.");
-                    break;
-                    
-                case 3:
-                    list.display();            
-                    break;
-                default:
-                    System.out.println("Invalid choice.");
-                    break;
-            }
+
+            processInput(input, sc, list);
         }
         sc.close();
     } 
+    public static void processInput(int input, Scanner sc, LinearSearch list) {
+        try {
+            switch (input) {
+                case 1 -> list.insert(sc);
+                case 2 -> list.search(sc);
+                case 3 -> list.display();
+                default -> System.out.println("Invalid choice.");
+            }
+        } catch (NullPointerException e) {
+            System.out.println("\nNo elements exist.");
+        }
+    }
 }

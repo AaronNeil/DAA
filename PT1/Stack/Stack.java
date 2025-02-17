@@ -24,7 +24,16 @@ public class Stack {
         System.out.println("null\nTop: " + top.value);
     }
 
-    public void push(int val){
+    public void push(Scanner sc){
+        int val;
+        
+        System.out.print("Enter value to add: ");
+        if (sc.hasNextInt()) val = sc.nextInt();
+        else{
+            System.out.println("Invalid input.");
+            return;
+        } 
+        
         Node newNode = new Node(val);
         if (top == null) top = newNode;
         else{
@@ -55,34 +64,23 @@ public class Stack {
 
             int input = Integer.parseInt(userInput);
             if (input == 0) break;
-    
-            switch (input) {
-                case 1:
-                    System.out.print("Enter value to add: ");
-                    if (sc.hasNextInt()) list.push(sc.nextInt());
-                    else System.out.println("Invalid input.");
-                    break;
-    
-                case 2:
-                    try { 
-                        list.pop();
-                    } catch (NullPointerException e) {
-                        System.out.println("\nNo keys to remove.");
-                    }
-                    break;
-    
-                case 3:
-                    try {
-                        list.display();            
-                    } catch (NullPointerException e) {
-                        System.out.println("\nNo keys to display.");
-                    }
-                    break;
-                default:
-                    System.out.println("Invalid choice.");
-                    break;
-            }
+            
+            processInput(input, sc, list);
+
         }
         sc.close();
+    }
+
+    public static void processInput(int input, Scanner sc, Stack list) {
+        try {
+            switch (input) {
+                case 1 -> list.push(sc);
+                case 2 -> list.pop();
+                case 3 -> list.display();
+                default -> System.out.println("Invalid choice.");
+            }
+        } catch (NullPointerException e) {
+            System.out.println("\nNo elements exist.");
+        }
     }
 }

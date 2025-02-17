@@ -91,7 +91,7 @@ public class PriorityQueue {
             switch (input) {
                 case 1 -> list.enqueue(sc);
                 case 2 -> list.dequeue();
-                case 3 -> list. display();
+                case 3 -> list.display();
                 default -> System.out.println("Invalid choice.");
             }
         } catch (NullPointerException e) {
