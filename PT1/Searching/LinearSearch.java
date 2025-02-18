@@ -23,9 +23,7 @@ public class LinearSearch {
             System.out.print(tempNode.value + ", ");
             tempNode = tempNode.next;
         }
-        if (head == null){
-            System.out.println("No nodes to display");
-        }
+        if (head == null) System.out.println("No nodes to display");
     }
 
     public void insert (Scanner sc){
@@ -53,8 +51,8 @@ public class LinearSearch {
         listSize++;
     }
 
-    public void search (Scanner sc){
-        int value, index;
+    public void search (Scanner sc){    
+        int value, index = -1;
         
         System.out.print("Enter value to search: ");
         if (sc.hasNextInt()) value = sc.nextInt();
@@ -64,13 +62,15 @@ public class LinearSearch {
         }
       
         Node tempNode = head;
-        for (int i = 0; i <= listSize - 1; i ++){
-            if (tempNode.value == value){
-                index = i;
+
+        if (listSize == 0) index = -1;
+        else {
+            for (int i = 0; i <= listSize - 1; i ++){
+                if (tempNode.value == value) index = i;
+                tempNode = tempNode.next;
             }
-            tempNode = tempNode.next;
         }
-        index = -1;
+        
 
         if (index == -1) System.out.println("\nNo nodes exist with given value.");
         else System.out.println("The value is at index[" + index + "]");
