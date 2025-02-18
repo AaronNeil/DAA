@@ -13,9 +13,7 @@ public class BubbleSort {
             value = v;
             next = null;
         }
-
     }
-
 
     public void display(){
         Node tempNode = head;
