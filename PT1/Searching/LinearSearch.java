@@ -18,12 +18,12 @@ public class LinearSearch {
 
     public void display(){
         Node tempNode = head;
-        System.out.println();
+        System.out.println("\nList: ");
         while (tempNode != null){
             System.out.print(tempNode.value + ", ");
             tempNode = tempNode.next;
         }
-        if (head == null) System.out.println("No nodes to display");
+        if (head == null) System.out.println("No elements to display");
     }
 
     public void insert (Scanner sc){
@@ -71,8 +71,7 @@ public class LinearSearch {
             }
         }
         
-
-        if (index == -1) System.out.println("\nNo nodes exist with given value.");
+        if (index == -1) System.out.println("\nNo elements exist with given value.");
         else System.out.println("The value is at index[" + index + "]");
 
     }
@@ -93,21 +92,10 @@ public class LinearSearch {
     
             int input = Integer.parseInt(userInput);
             if (input == 0) break;
-
-            processInput(input, sc, list);
+            if (input == 1) list.insert(sc);
+            if (input == 2) list.search(sc);
+            if (input == 3) list.display();
         }
         sc.close();
     } 
-    public static void processInput(int input, Scanner sc, LinearSearch list) {
-        try {
-            switch (input) {
-                case 1 -> list.insert(sc);
-                case 2 -> list.search(sc);
-                case 3 -> list.display();
-                default -> System.out.println("Invalid choice.");
-            }
-        } catch (NullPointerException e) {
-            System.out.println("\nNo elements exist.");
-        }
-    }
 }

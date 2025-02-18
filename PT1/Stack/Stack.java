@@ -21,7 +21,8 @@ public class Stack {
             System.out.print(tempNode.value + " <- ");
             tempNode = tempNode.next;
         }
-        System.out.println("null\nTop: " + top.value);
+        if (top == null) System.out.println("No elements to display.");
+        else System.out.println("null\nTop: " + top.value);
     }
 
     public void push(Scanner sc){
@@ -43,6 +44,10 @@ public class Stack {
     }
 
     public int pop(){
+        if (top == null){
+            System.out.println("\nNo elements to pop.");
+            return -1;
+        }
         Node tempNode = top;
         top = top.next;
         return tempNode.value;
@@ -64,23 +69,11 @@ public class Stack {
 
             int input = Integer.parseInt(userInput);
             if (input == 0) break;
-            
-            processInput(input, sc, list);
+            if (input == 1) list.push(sc);
+            if (input == 2) list.pop();
+            if (input == 3) list.display();
 
         }
         sc.close();
-    }
-
-    public static void processInput(int input, Scanner sc, Stack list) {
-        try {
-            switch (input) {
-                case 1 -> list.push(sc);
-                case 2 -> list.pop();
-                case 3 -> list.display();
-                default -> System.out.println("Invalid choice.");
-            }
-        } catch (NullPointerException e) {
-            System.out.println("\nNo elements exist.");
-        }
     }
 }

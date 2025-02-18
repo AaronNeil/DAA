@@ -22,7 +22,8 @@ public class PriorityQueue {
             System.out.print(tempNode.value + " <- ");
             tempNode = tempNode.next;
         }
-        System.out.println("null\nTop: " + top.value);
+        if (top == null) System.out.println("\nNo elements to display");
+        else System.out.println("null\nTop: " + top.value);
     }
 
     public void enqueue(Scanner sc){
@@ -60,6 +61,11 @@ public class PriorityQueue {
     }
 
     public int dequeue(){
+        if (top == null){
+            System.out.println("\nNo elements to pop.");
+            return -1;
+        }
+        
         Node tempNode = top;
         top = top.next;
         return tempNode.value;
@@ -78,24 +84,13 @@ public class PriorityQueue {
                 System.out.println("Invalid input. Please enter a number.");
                 continue;
             }
+            
             int input = Integer.parseInt(userInput);
             if (input == 0) break;
-            
-            processInput(input, sc, list); 
+            if (input == 1) list.enqueue(sc);
+            if (input == 2) list.dequeue();
+            if (input == 3) list.display();
         }
         sc.close();
-    }
-
-    public static void processInput(int input, Scanner sc, PriorityQueue list) {
-        try {
-            switch (input) {
-                case 1 -> list.enqueue(sc);
-                case 2 -> list.dequeue();
-                case 3 -> list.display();
-                default -> System.out.println("Invalid choice.");
-            }
-        } catch (NullPointerException e) {
-            System.out.println("\nNo elements exist.");
-        }
     }
 }

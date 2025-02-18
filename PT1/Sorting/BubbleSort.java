@@ -3,7 +3,6 @@ package PT1.Sorting;
 import java.util.Scanner;
 
 public class BubbleSort {
-    private int listSize = 0;
     private Node head;
 
     public static class Node {
@@ -20,12 +19,12 @@ public class BubbleSort {
 
     public void display(){
         Node tempNode = head;
-        System.out.println();   
+        System.out.print("\nList: ");   
         while (tempNode != null){
             System.out.print(tempNode.value + ", ");
             tempNode = tempNode.next;
         }
-        if (head == null) System.out.println("No nodes to display");
+        if (head == null) System.out.println("No elements to display");
     }
 
     public void insert (Scanner sc){
@@ -50,12 +49,11 @@ public class BubbleSort {
             }
             tempNode.next = newNode;
         }
-        listSize++;
     }
     
     public void sort() {
-        if (head == null || head.next == null) {
-            System.out.println("No nodes to sort.");
+        if (head == null) {
+            System.out.println("\nNo elements to sort.");
             return;
         }
         boolean swapped;
@@ -96,21 +94,10 @@ public class BubbleSort {
     
             int input = Integer.parseInt(userInput);
             if (input == 0) break;
-
-            processInput(input, sc, list);
+            if (input == 1) list.insert(sc);
+            if (input == 2) list.sort();
+            if (input == 3) list.display();
         }
         sc.close();
     } 
-    public static void processInput(int input, Scanner sc, BubbleSort list) {
-        try {
-            switch (input) {
-                case 1 -> list.insert(sc);
-                case 2 -> list.sort();
-                case 3 -> list.display();
-                default -> System.out.println("Invalid choice.");
-            }
-        } catch (NullPointerException e) {
-            System.out.println("\nNo elements exist.");
-        }
-    }
 }
