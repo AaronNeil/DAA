@@ -32,7 +32,8 @@ public class CircularLinkedList {
             System.out.print(tempNode.value + " -> ");
             tempNode = tempNode.next;
         } while (tempNode != head);
-        System.out.println("head\nhead:" + head.value + "\ttail:" + tail.value + "\tlistSize:" + listSize);
+        if (head == null) System.out.println("No nodes to display");
+        else System.out.println("head\nhead:" + head.value + "\ttail:" + tail.value + "\tlistSize:" + listSize);
     }
 
     public void createNewNode (Scanner sc) {

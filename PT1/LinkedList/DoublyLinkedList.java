@@ -36,7 +36,8 @@ public class DoublyLinkedList {
             System.out.print(" " + tempNode.value + " -");
             tempNode = tempNode.next;
         }
-        System.out.println("> null\nhead:" + head.value + "\ttail:" + tail.value + "\tlistSize:" + listSize);
+        if (head == null) System.out.println("No nodes to display");
+        else System.out.println("> null\nhead:" + head.value + "\ttail:" + tail.value + "\tlistSize:" + listSize);
     }
     
     public void createNewNode (Scanner sc) {

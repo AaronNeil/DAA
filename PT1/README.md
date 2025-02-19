@@ -1,6 +1,6 @@
 # Overview of Data Structures
 - Graph
-    - BFS
+    - Undirected Graph
 - Heap
     - Min Heap
     - Max Heap
@@ -26,70 +26,148 @@ Windows and Linux:
 java <file name>
 ```
 # How to operate
-## BFS
-| Inputs | Function |
-| --- | --- |
+## Undirected Graph
+- Asciinema video examples
+[Undirected Graph](https://asciinema.org/a/YBWko1xcUXjYi8UdzsiXkTdVg)
 
-## Min Heap
 | Inputs | Function |
-| --- | --- |
+| :-: | --- |
+| 0 | stops the program |
+| 1 | prompts the user to input a source and destination |
+| 2 | display the graph in Adjacency list representation |
 
-## Max Heap
+## Heaps
+- Asciinema video examples
+[Min Heap](https://asciinema.org/a/qfrKzzuTXggWNSBBsz0uQhoCM)
+[Max Heap](https://asciinema.org/a/FhZcTvuIbsIldrGPmuRtUE2ya)
+
 | Inputs | Function |
-| --- | --- |
+| :-: | --- |
+| 0 | stops the program |
+| 1 | prompts the user to input a number |
+| 2 | displays the heap using BFS|
 
 ## Linked Lists
+- Asciinema video examples
+[Singly Linked List](https://asciinema.org/a/BS7q8J4mPjMC20g9Flxa7lAzo)
+[Doubly Linked List](https://asciinema.org/a/4WFUXAsSXZe7Xkkf51lVlEc2u)
+[Circular Linked List](https://asciinema.org/a/gRNaSgEIkI7Z5jKBnktGbLLoq)
+
 | Inputs | Function |
-| --- | --- |
-[0]Exit |               stops the program |
-[1]Create Node |        prompts the user to input a number |
-[2]Delete last node |   deletes the last node / newly created node |
-[3]Display all info |   displays the list and its following informations |
+| :-: | --- |
+| 0 | stops the program |
+| 1 | prompts the user to input a number |
+| 2 | deletes the last node / newly created node |
+| 3 | displays the list and its following informations |
 
 ## Queue
+- Asciinema video examples
+[Sinmple Queue](https://asciinema.org/a/P8VmmyN9pvwEn0ru3lGAa1YAw)
+[Priority Queue](https://asciinema.org/a/oxe9fjP2jM1z1Qaqe9jVGVjHB)
+
 | Inputs | Function |
-| --- | --- |
-| [0]Exit |             stops the program |
-[1]Enqueue |            prompts the user to input a number |
-[2]Dequeue |            deletes the bottom node of the queue / oldest node|
-[3]Display Queue |      displays the list and its following informations |
+| :-: | --- |
+| 0 | stops the program |
+| 1 | prompts the user to input a number |
+| 2 | deletes the bottom node of the queue / oldest node|
+| 3 | displays the list and its following informations |
 
 ## Searching
+- Asciinema video examples
+[Linear Search](https://asciinema.org/a/FVvMF6hfPapX03sUWQZCjol7a)
+
 | Inputs | Function |
-| --- | --- |
-| [0]Exit |             stops the program |
-| [1]Create Node |      prompts the user to input a number |
-| [2]Search based on value | finds the index number based on the value inputted |
-| [3]Display list |     displays the list and its following informations |
+| :-: | --- |
+| 0 | stops the program |
+| 1 | prompts the user to input a number |
+| 2 | finds the index number based on the value inputted |
+| 3 | displays the list |
 
 ## Sorting 
+- Asciinema video examples
+[Bubble Sort](https://asciinema.org/a/LWdECVbXX28AgH4lJxe8s16kp)
+
 | Inputs | Function |
-| --- | --- |
-| [0]Exit |             stops the program |
-| [1]Create Node |      prompts the user to input a number |
-| [2]Sort Nodes |       sorts the numbers based on the numbers inputted |
-| [3]Display list |     displays the list and its following informations |
+| :-: | --- |
+| 0 | stops the program |
+| 1 | prompts the user to input a number |
+| 2 | sorts the numbers based on the numbers inputted |
+| 3 | displays the list and its following informations |
 
 ## Stack
+- Asciinema video examples
+[Stack](https://asciinema.org/a/WzkmppTsfAW7A31LbZTEaFBQa)
+
 | Inputs | Function |
-| --- | --- |
-| [0]Exit |             stops the program |
-| [1]Push |             prompts the user to input a number |
-| [2]Pop |              deletes the top node of the stack |
-| [3]Display Stack |    displays the list and its following informations |
+| :-: | --- |
+| 0 | stops the program |
+| 1 | prompts the user to input a number |
+| 2 | deletes the top node of the stack |
+| 3 | displays the stack and its following informations |
 ## Binary Tree 
+- Asciinema video examples
+[Binary Tree](https://asciinema.org/a/4DvgBdsiSd3zF611VhgjPrDSF)
+
 | Inputs | Function |
-| --- | --- |
-| [0]Exit |             stops the program |
-| [1]Insert |           prompts the user to input a number |
-| [2]Display tree |     deletes the first node / oldest created node |
+| :-: | --- |
+| 0 | stops the program |
+| 1 | prompts the user to input a number |
+| 2 | displays the tree |
 
 # Explanations
-## BFS
+## Undirected Graph
+A Graph is a non-linear data structure consisting of vertices which contains the data and the edges that connects any two vertices together. An undirected graph is basically a graph where its edges have no specified direction assigned to it.  
+### There are 2 functions within the code:
+- addEdge()
+This functions promprs the user to input the source and destination vertices and ensures that the user has inputted a number. It then adds an edge between the source and destination vertices in the adjacency list representation of the graph.
+example:
 
+        Enter source vertex: 0
+        Enter destination vertex: 1
+        Edge added between 0 and 1
+
+- display()
+This functions prints the adjacency list representation of the graph. It is done by itterating through the adjacency list and prints each vertex and its connected vertices.
+example:
+
+        Adjacency List Representation:
+        0: 1, 2, 3
+        1: 0, 3
+        2: 0
+        3: 0, 1
 ## Min Heap
+A Min Heap is a binary heap data structure where the root node is the smallest element. Each parent node is smaller than or equal to its child nodes. This property ensures that the minimum element is always at the root.
+### There are 2 functions within the code:
+
+- insert()
+This fuction adds the value to the heap based on the user input and swaps the parent node to the child node if the parent node is greater than the child node. It then repeats this swapping until it is a min-heap.
+example:
+
+        Enter value to insert: 2
+        Inserted 2 into the min-heap.
+
+- display()
+The display function outputs the heap using a Level Order Traversal. It checks first if the heap is empty and it prints out a message if so.
+example:
+
+        Current min-heap: 0 1 8 2  
+
 
 ## Max Heap
+A Max Heap is a binary heap data structure where the root node is the largest element. Each parent node is larger than or equal to its child nodes. This property ensures that the maximum element is always at the root.
+### There are 2 functions within the code:
+- insert()
+This fuction adds the value to the heap based on the user input and swaps the parent node to the child node if the parent node is less than the child node. It then repeats this swapping until it is a min-heap.
+example:
+
+        Enter value to insert: 2
+        Inserted 2 into the max-heap.
+
+- display()
+The display function outputs the heap using a Level Order Traversal. It checks first if the heap is empty and it prints out a message if so.
+example:
+
+        Current max-heap: 8 2 1 0  
 
 ## Circular Linked List
 A Circular Linked List is a data structure that connect the pointer of the tail to the head forming a loop and it allows continuous traversal. It consists of the the data and the pointer that holds the memory adress to the next node. This creates a list that is connected only on one side.
@@ -264,22 +342,28 @@ example:
 
 ## Binary Tree 
 
-### There are 2 functions within the code:
+### There are 3 functions within the code:
 - display()
 The display function outputs the tree using a Level Order Traversal. It checks first if the tree is empty and it prints out a message if so.
 example:
 
-        
+        root: 9
+        level 1: 8
+        level 2: 7
 - insert()
+The insert function firstly asks the user to prompt the node of the tree. Afterwards, it then asks if the user wants to insert a value to the left and right of the root. if the user agrees, it recursively calls the function till the user disagrees.
+example:
 
+        Enter root node: 9
+         
+        Do you want to enter left of 9: y
+        Enter the value of the left of 9: 8
+        
+        // Output
+        root: 9
+        level 1: 8
 
-
-
-
-
-
-
-
-
+- getYesNoInput()
+This function basically scans if the user inputted a y or n. If they inputted anything apart from y and n, the function will restart again to get user validation.
 
 
