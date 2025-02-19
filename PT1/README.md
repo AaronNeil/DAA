@@ -39,6 +39,7 @@ java <file name>
 ## Heaps
 - Asciinema video examples
 [Min Heap](https://asciinema.org/a/qfrKzzuTXggWNSBBsz0uQhoCM)
+
 [Max Heap](https://asciinema.org/a/FhZcTvuIbsIldrGPmuRtUE2ya)
 
 | Inputs | Function |
@@ -50,7 +51,9 @@ java <file name>
 ## Linked Lists
 - Asciinema video examples
 [Singly Linked List](https://asciinema.org/a/BS7q8J4mPjMC20g9Flxa7lAzo)
+
 [Doubly Linked List](https://asciinema.org/a/4WFUXAsSXZe7Xkkf51lVlEc2u)
+
 [Circular Linked List](https://asciinema.org/a/gRNaSgEIkI7Z5jKBnktGbLLoq)
 
 | Inputs | Function |
@@ -63,6 +66,7 @@ java <file name>
 ## Queue
 - Asciinema video examples
 [Sinmple Queue](https://asciinema.org/a/P8VmmyN9pvwEn0ru3lGAa1YAw)
+
 [Priority Queue](https://asciinema.org/a/oxe9fjP2jM1z1Qaqe9jVGVjHB)
 
 | Inputs | Function |
