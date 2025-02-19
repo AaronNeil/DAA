@@ -1,5 +1,3 @@
-package PT1.Sorting;
-
 import java.util.Scanner;
 
 public class BubbleSort {

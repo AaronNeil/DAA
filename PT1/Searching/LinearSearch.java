@@ -1,5 +1,3 @@
-package PT1.Searching;
-
 import java.util.Scanner;
 
 public class LinearSearch {

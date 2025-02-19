@@ -1,4 +1,3 @@
-package PT1.Graph;
 import java.util.*;
 
 public class UndirectedGraph {

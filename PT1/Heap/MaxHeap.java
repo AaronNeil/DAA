@@ -1,5 +1,3 @@
-package PT1.Heap;
-
 import java.util.LinkedList;
 import java.util.Scanner;
 

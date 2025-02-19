@@ -1,8 +1,4 @@
-package PT1.Trees;
-
-import java.util.Scanner;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 public class BinaryTree {
     public static Node rootNode;
@@ -56,7 +52,10 @@ public class BinaryTree {
             if (sc.hasNextInt()) {
                 value = sc.nextInt();
                 break;
-            } else System.out.println("Invalid input. Please enter an integer.");
+            } else {
+                System.out.println("Invalid input. Please enter an integer.");
+                sc.next();        
+            }
         }
         return value;
     }
@@ -67,8 +66,10 @@ public class BinaryTree {
             String input = sc.next();
             if (input.equalsIgnoreCase("y")) return true;
             else if (input.equalsIgnoreCase("n")) return false;
-            else System.out.println("Invalid input. Please enter 'y' or 'n'.");
-            
+            else {
+                System.out.println("Invalid input. Please enter 'y' or 'n'.");
+                sc.next();
+            }
         }
     }
 

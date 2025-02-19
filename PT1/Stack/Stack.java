@@ -1,4 +1,3 @@
-package PT1.Stack;
 import java.util.Scanner;
 
 

@@ -1,5 +1,3 @@
-package PT1.Queues;
-
 import java.util.Scanner;
 
 public class PriorityQueue {

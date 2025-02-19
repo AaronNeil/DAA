@@ -1,4 +1,3 @@
-package PT1.LinkedList;
 import java.util.Scanner;
 
 public class SinglyLinkedList {
