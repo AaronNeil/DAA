@@ -28,6 +28,7 @@ java <file name>
 # How to operate
 ## Undirected Graph
 - Asciinema video examples
+
 [Undirected Graph](https://asciinema.org/a/YBWko1xcUXjYi8UdzsiXkTdVg)
 
 | Inputs | Function |
@@ -38,6 +39,7 @@ java <file name>
 
 ## Heaps
 - Asciinema video examples
+
 [Min Heap](https://asciinema.org/a/qfrKzzuTXggWNSBBsz0uQhoCM)
 
 [Max Heap](https://asciinema.org/a/FhZcTvuIbsIldrGPmuRtUE2ya)
@@ -50,6 +52,7 @@ java <file name>
 
 ## Linked Lists
 - Asciinema video examples
+
 [Singly Linked List](https://asciinema.org/a/BS7q8J4mPjMC20g9Flxa7lAzo)
 
 [Doubly Linked List](https://asciinema.org/a/4WFUXAsSXZe7Xkkf51lVlEc2u)
@@ -65,6 +68,7 @@ java <file name>
 
 ## Queue
 - Asciinema video examples
+
 [Sinmple Queue](https://asciinema.org/a/P8VmmyN9pvwEn0ru3lGAa1YAw)
 
 [Priority Queue](https://asciinema.org/a/oxe9fjP2jM1z1Qaqe9jVGVjHB)
@@ -78,6 +82,7 @@ java <file name>
 
 ## Searching
 - Asciinema video examples
+
 [Linear Search](https://asciinema.org/a/FVvMF6hfPapX03sUWQZCjol7a)
 
 | Inputs | Function |
@@ -89,6 +94,7 @@ java <file name>
 
 ## Sorting 
 - Asciinema video examples
+
 [Bubble Sort](https://asciinema.org/a/LWdECVbXX28AgH4lJxe8s16kp)
 
 | Inputs | Function |
@@ -100,6 +106,7 @@ java <file name>
 
 ## Stack
 - Asciinema video examples
+
 [Stack](https://asciinema.org/a/WzkmppTsfAW7A31LbZTEaFBQa)
 
 | Inputs | Function |
@@ -110,6 +117,7 @@ java <file name>
 | 3 | displays the stack and its following informations |
 ## Binary Tree 
 - Asciinema video examples
+
 [Binary Tree](https://asciinema.org/a/4DvgBdsiSd3zF611VhgjPrDSF)
 
 | Inputs | Function |
