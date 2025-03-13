@@ -24,16 +24,7 @@ public class LinearSearch {
         if (head == null) System.out.println("No elements to display");
     }
 
-    public void insert (Scanner sc){
-        int value;
-        
-        System.out.print("Enter value to add: ");
-        if (sc.hasNextInt()) value = sc.nextInt();
-        else {
-            System.out.println("Invalid input.");
-            return;
-        }
-
+    public void insert (int value){
         Node newNode = new Node(value);
         newNode.next = null;
 
@@ -49,16 +40,8 @@ public class LinearSearch {
         listSize++;
     }
 
-    public void search (Scanner sc){    
-        int value, index = -1;
-        
-        System.out.print("Enter value to search: ");
-        if (sc.hasNextInt()) value = sc.nextInt();
-        else{
-            System.out.println("Invalid input.");
-            return;
-        }
-      
+    public void search (int value){    
+        int index = -1;        
         Node tempNode = head;
 
         if (listSize == 0) index = -1;
@@ -74,25 +57,45 @@ public class LinearSearch {
 
     }
 
+    static boolean processInput(LinearSearch list, Scanner sc){
+        System.out.println("\n[0]Exit\t\t[2]Search based on value");
+        System.out.println("[1]Create Node\t[3]Display list");
+        
+        String userInput = sc.next();
+        if (!userInput.matches("\\d+")) {
+            System.out.println("Invalid input. Please enter a number.");
+            return true;
+        }
+
+        int input = Integer.parseInt(userInput);
+        if (input == 0) return false;
+        if (input == 1) {
+            System.out.print("Enter value to add: ");
+            if (!sc.hasNextInt()){
+                System.out.println("Invalid input.");
+                return true;
+            } 
+            list.insert(sc.nextInt());
+
+        }
+        if (input == 2) {
+            System.out.print("Enter value to search: ");
+            if (!sc.hasNextInt()){
+                System.out.println("Invalid input.");
+                return true;
+            } 
+            list.search(sc.nextInt());
+        }
+        if (input == 3) list.display();
+        return true;
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         LinearSearch list = new LinearSearch();
 
         while (true) {
-            System.out.println("\n\n[0]Exit\t\t[2]Search based on value");
-            System.out.println("[1]Create Node\t[3]Display list");
-            
-            String userInput = sc.next();
-            if (!userInput.matches("\\d+")) {
-                System.out.println("Invalid input. Please enter a number.");
-                continue;
-            }
-    
-            int input = Integer.parseInt(userInput);
-            if (input == 0) break;
-            if (input == 1) list.insert(sc);
-            if (input == 2) list.search(sc);
-            if (input == 3) list.display();
+            if (!processInput(list, sc)) break;
         }
         sc.close();
     } 

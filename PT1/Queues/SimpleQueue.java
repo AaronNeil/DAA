@@ -23,16 +23,7 @@ public class SimpleQueue {
         else System.out.println("null\nTop: " + top.value);
     }
 
-    public void enqueue(Scanner sc){
-        int val;
-        
-        System.out.print("Enter value to add: ");
-            if (sc.hasNextInt()) val = sc.nextInt();
-            else{
-                System.out.println("Invalid input.");
-                return;
-            }
-
+    public void enqueue(int val){
         Node newNode = new Node(val);
         if (top == null) top = newNode;
         else bottom.next = newNode;
@@ -50,26 +41,37 @@ public class SimpleQueue {
         return tempNode.value;
     }
 
+    static boolean processInput(SimpleQueue list, Scanner sc){
+        System.out.println("\n[0]Exit\t\t[2]Dequeue");
+        System.out.println("[1]Enqueue\t[3]Display Queue");
+
+        String userInput = sc.next();
+        if (!userInput.matches("\\d+")) {
+            System.out.println("Invalid input. Please enter a number.");
+            return true;
+        }
+
+        int input = Integer.parseInt(userInput);
+        if (input == 0) return false;
+        if (input == 1) {
+            System.out.print("Enter value to add: ");
+            if (!sc.hasNextInt()){
+                System.out.println("Invalid input.");
+                return true;
+            }
+            list.enqueue(sc.nextInt());
+        }
+        if (input == 2) list.dequeue();
+        if (input == 3) list.display();
+        return true;
+    }
+    
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         SimpleQueue list = new SimpleQueue();
 
         while (true) {
-            System.out.println("\n[0]Exit\t\t[2]Dequeue");
-            System.out.println("[1]Enqueue\t[3]Display Queue");
-
-            String userInput = sc.next();
-            if (!userInput.matches("\\d+")) {
-                System.out.println("Invalid input. Please enter a number.");
-                continue;
-            }
-
-            int input = Integer.parseInt(userInput);
-            if (input == 0) break;
-            if (input == 1) list.enqueue(sc);
-            if (input == 2) list.dequeue();
-            if (input == 3) list.display();
-
+            if (!processInput(list, sc)) break;
         }
         sc.close();
     }

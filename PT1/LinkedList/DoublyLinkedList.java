@@ -38,15 +38,7 @@ public class DoublyLinkedList {
         else System.out.println("> null\nhead:" + head.value + "\ttail:" + tail.value + "\tlistSize:" + listSize);
     }
     
-    public void createNewNode (Scanner sc) {
-        int val;
-        System.out.print("Enter value to add: ");
-        if (sc.hasNextInt()) val = sc.nextInt();
-        else {
-            System.out.println("Invalid input.");
-            return;
-        }
- 
+    public void createNewNode (int val) {
         Node newNode = new Node(val);
 
         if (head == null) head = tail = newNode;
@@ -78,27 +70,37 @@ public class DoublyLinkedList {
         return val;
     }
 
+    static boolean processInput(DoublyLinkedList list, Scanner sc){
+        System.out.println("\n\n[0]Exit\t\t\t[2]Delete last node");
+        System.out.println("[1]Create node\t\t[3]Display all info");
+        String userInput = sc.next();
+        if (!userInput.matches("\\d+")) {
+            System.out.println("Invalid input. Please enter a number.");
+            return true;
+        }
+
+        int input = Integer.parseInt(userInput);
+        if (input == 0) return false;
+        if (input == 1) {
+            System.out.print("Enter value to add: ");
+            if (!sc.hasNextInt()) {
+                System.out.println("Invalid input.");
+                return true;
+            }    
+            list.createNewNode(sc.nextInt());
+        }   
+        if (input == 2) list.deleteNewNode();
+        if (input == 3) list.display();
+        return true;
+    }
+
     public static void main(String[] args) {
+        boolean n = true; 
         Scanner sc = new Scanner(System.in);
         DoublyLinkedList list = new DoublyLinkedList();
 
         while (true) {
-            System.out.println("\n\n[0]Exit\t\t\t[2]Delete last node");
-            System.out.println("[1]Create node\t\t[3]Display all info");
-            
-            String userInput = sc.next();
-            if (!userInput.matches("\\d+")) {
-                System.out.println("Invalid input. Please enter a number.");
-                continue;
-            }
-    
-            int input = Integer.parseInt(userInput);
-            if (input == 0) break;
-
-            if (input == 1) list.createNewNode(sc);
-            if (input == 2) list.deleteNewNode();
-            if (input == 3) list.display();
- 
+            if (!processInput(list, sc)) break;
         }
         sc.close();
     }

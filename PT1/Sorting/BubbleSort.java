@@ -23,16 +23,7 @@ public class BubbleSort {
         if (head == null) System.out.println("No elements to display");
     }
 
-    public void insert (Scanner sc){
-        int value;
-        
-        System.out.print("Enter value to add: ");
-        if (sc.hasNextInt()) value = sc.nextInt();
-        else {
-            System.out.println("Invalid input.");
-            return;
-        }
-        
+    public void insert (int value){
         Node newNode = new Node(value);
         newNode.next = null;
 
@@ -74,25 +65,37 @@ public class BubbleSort {
         } while (swapped);
     }
 
+    static boolean processInput(BubbleSort list, Scanner sc){
+        System.out.println("\n\n[0]Exit\t\t[2]Sort the Nodes");
+        System.out.println("[1]Create Node\t[3]Display list");
+        
+        String userInput = sc.next();
+        if (!userInput.matches("\\d+")) {
+            System.out.println("Invalid input. Please enter a number.");
+            return true;
+        }
+
+        int input = Integer.parseInt(userInput);
+        if (input == 0) return false;
+        if (input == 1) {
+            System.out.print("Enter value to add: ");
+            if (!sc.hasNextInt()){
+                System.out.println("Invalid input.");
+                return true;
+            } 
+            list.insert(sc.nextInt());
+        }
+        if (input == 2) list.sort();
+        if (input == 3) list.display();
+        return true;
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         BubbleSort list = new BubbleSort();
 
         while (true) {
-            System.out.println("\n\n[0]Exit\t\t[2]Sort the Nodes");
-            System.out.println("[1]Create Node\t[3]Display list");
-            
-            String userInput = sc.next();
-            if (!userInput.matches("\\d+")) {
-                System.out.println("Invalid input. Please enter a number.");
-                continue;
-            }
-    
-            int input = Integer.parseInt(userInput);
-            if (input == 0) break;
-            if (input == 1) list.insert(sc);
-            if (input == 2) list.sort();
-            if (input == 3) list.display();
+            if (!processInput(list, sc)) break;
         }
         sc.close();
     } 

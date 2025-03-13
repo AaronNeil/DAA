@@ -43,7 +43,7 @@ public class RandomizedAlgo {
     }
 
     public static void main(String[] args) {
-        int[] arr = {10, 7, 8, 9, 1, 2};
+        int[] arr = {10, 7, 8, 9, 1, 5};
         int n = arr.length;
 
         System.out.println("Original array:");

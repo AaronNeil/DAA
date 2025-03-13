@@ -2,22 +2,7 @@ import java.util.*;
 
 public class UndirectedGraph {
 
-    public static void addEdge(Map<Integer, List<Integer>> adj, Scanner sc) {
-        int src, dest;
-
-        System.out.print("Enter source vertex: ");
-        if (sc.hasNextInt()) src = sc.nextInt();
-        else {
-            System.out.println("Invalid input. Please enter an integer.");
-            return;
-        }
-        System.out.print("Enter destination vertex: ");
-        if (sc.hasNextInt()) dest = sc.nextInt();
-        else {
-            System.out.println("Invalid input. Please enter an integer.");
-            return;
-        }     
-
+    public static void addEdge(Map<Integer, List<Integer>> adj, int src, int dest) {
         adj.putIfAbsent(src, new ArrayList<>());
         adj.putIfAbsent(dest, new ArrayList<>());
         adj.get(src).add(dest);
@@ -36,24 +21,45 @@ public class UndirectedGraph {
         }
     }
 
+    static boolean processInput(Map<Integer, List<Integer>> adj, Scanner sc) {
+        System.out.println("\n[0]Exit\t\t[2]Display adjacency list");
+        System.out.println("[1]Add Edge");
+
+        String userInput = sc.next();
+        if (!userInput.matches("\\d+")) {
+            System.out.println("Invalid input. Please enter a number.");
+            return true;
+        }
+
+        int input = Integer.parseInt(userInput);
+        if (input == 0) return false;
+        if (input == 1) {
+            System.out.print("Enter source vertex: ");
+            if (!sc.hasNextInt()){
+                System.out.println("Invalid input. Please enter an integer.");
+                return true;
+            }
+            int src = sc.nextInt();
+
+            System.out.print("Enter destination vertex: ");  
+            if (!sc.hasNextInt()){
+                System.out.println("Invalid input. Please enter an integer.");
+                return true;
+            } 
+            int dest = sc.nextInt();
+            
+            addEdge(adj, src, dest);
+        }
+        if (input == 2) display(adj);
+        return true;
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Map<Integer, List<Integer>> adj = new HashMap<>();
 
         while (true) {
-            System.out.println("\n\n[0]Exit\t\t[2]Display adjacency list");
-            System.out.println("[1]Add Edge");
-
-            String userInput = sc.next();
-            if (!userInput.matches("\\d+")) {
-                System.out.println("Invalid input. Please enter a number.");
-                continue;
-            }
-
-            int input = Integer.parseInt(userInput);
-            if (input == 0) break;
-            if (input == 1) addEdge(adj, sc);
-            if (input == 2) display(adj);
+            if (!processInput(adj, sc)) break;
         }
         sc.close();
     }

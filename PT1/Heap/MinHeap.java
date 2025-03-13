@@ -3,17 +3,7 @@ import java.util.Scanner;
 
 public class MinHeap {
 
-    public static void insert(LinkedList<Integer> heap, Scanner sc) {
-        int value;
-
-        System.out.print("Enter value to insert: ");
-        if (sc.hasNextInt()) {
-            value = sc.nextInt();
-            System.out.println("Inserted " + value + " into the min-heap.");
-        } else {
-            System.out.println("Invalid input. Please enter an integer.");
-            return;
-        }
+    public static void insert(LinkedList<Integer> heap, int value) {
         heap.add(value);
         int index = heap.size() - 1;
         while (index > 0 && heap.get((index - 1) / 2) > heap.get(index)) {
@@ -22,6 +12,7 @@ public class MinHeap {
             heap.set(index, temp);
             index = (index - 1) / 2;
         }
+        System.out.println("Inserted " + value + " into the min-heap.");
     }
 
     public static void display(LinkedList<Integer> heap) {
@@ -52,7 +43,14 @@ public class MinHeap {
     
             int input = Integer.parseInt(userInput);
             if (input == 0) break;
-            if (input == 1) insert(heap, sc);
+            if (input == 1) {
+                System.out.print("Enter value to insert: ");
+                if (!sc.hasNextInt()) {
+                    System.out.println("Invalid input. Please enter an integer.");
+                    continue;
+                }
+                insert(heap, sc.nextInt());
+            }
             if (input == 2) display(heap);
         }
         sc.close();

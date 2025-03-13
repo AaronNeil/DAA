@@ -1,23 +1,18 @@
 import java.util.Scanner;
 
+class Node {
+    int value;
+    Node next;
+
+    Node (int v) {
+        value = v;
+        next = null;
+    }
+}
+
 public class SinglyLinkedList {
     private int listSize = 0;
     private Node head, tail;
-
-    public static class Node {
-        int value;
-        Node next;
-
-        Node (int v) {
-            value = v;
-            next = null;
-        }
-
-        Node (int v, Node next_){
-            value = v;
-            next = next_;
-        }
-    }
 
     public void display(){
         Node tempNode = head;
@@ -30,15 +25,7 @@ public class SinglyLinkedList {
         else System.out.println("null\nhead:" + head.value + "\ttail:" + tail.value + "\tlistSize:" + listSize);
     }
     
-    public void createNewNode (Scanner sc) {
-        int val;
-        System.out.print("Enter value to add: ");
-        if (sc.hasNextInt()) val = sc.nextInt();
-        else {
-            System.out.println("Invalid input.");
-            return;
-        }
-        
+    public void createNewNode (int val) {
         Node newNode = new Node(val);
 
         if (head == null) head = newNode;
@@ -73,26 +60,36 @@ public class SinglyLinkedList {
         listSize--;
         return val;
     }
+
+    static boolean processInput(SinglyLinkedList list, Scanner sc){
+        System.out.println("\n\n[0]Exit\t\t\t[2]Delete last node");
+        System.out.println("[1]Create node\t\t[3]Display all info");
+        String userInput = sc.next();
+        if (!userInput.matches("\\d+")) {
+            System.out.println("Invalid input. Please enter a number.");
+            return true;
+        }
+
+        int input = Integer.parseInt(userInput);
+        if (input == 0) return false;
+        if (input == 1) {
+            System.out.print("Enter value to add: ");
+            if (!sc.hasNextInt()) {
+                System.out.println("Invalid input.");
+                return true;
+            }    
+            list.createNewNode(sc.nextInt());
+        }   
+        if (input == 2) list.deleteNewNode();
+        if (input == 3) list.display();
+        return true;
+    }
+    
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         SinglyLinkedList list = new SinglyLinkedList();
-    
         while (true) {
-
-            System.out.println("\n\n[0]Exit\t\t\t[2]Delete last node");
-            System.out.println("[1]Create node\t\t[3]Display all info");
-            
-            String userInput = sc.next();
-            if (!userInput.matches("\\d+")) {
-                System.out.println("Invalid input. Please enter a number.");
-                continue;
-            }
-    
-            int input = Integer.parseInt(userInput);
-            if (input == 0) break;
-            if (input == 1) list.createNewNode(sc);
-            if (input == 2) list.deleteNewNode();
-            if (input == 3) list.display();
+            if (!processInput(list, sc)) break;
         }
         sc.close();
     }
